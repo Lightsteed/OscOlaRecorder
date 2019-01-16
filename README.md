@@ -6,7 +6,27 @@ Runs great on a raspberry pi 3b+, receiving content VIA artnet from Resolume the
 
 It's super hacky as i dont know much about coding, but it works very well and is super responsive. If anyone would like to clean up my code or fork it and make it better then be my guest!
 
-things to fix:
+####INSTRUCTIONS####
+
+- set up OLA with up to 15 universes with Artnet in and sacn out or vice versa depending on your rig
+- make sure python is installed on your pi
+- copy oscolarecorder.py file to your Pi in the home directory.
+type:
+sudo python oscolarecorder.py
+
+then you should be able to trigger recording, playback, loop and shuffle of the incoming and outgoing artnet/sacn data using Touchosc or any osc application with the following messages:
+
+record - /1/toggle1, /1/toggle2, /1/toggle3 etc
+playback - /2/toggle1, /2/toggle2, /2/toggle3 etc
+stop all playback - /3/stopallplay
+stop all recording - /3/stopallrec
+play all recorded files in series on loop - /3/playall
+shuffle all recorded files on loop - /3/shuffle
+set duration of how long a recording plays before moving onto the next one - /3/loopduration
+
+I will upload my template for Touchosc shortly, it has 3 pages, 66 record and playback banks.
+
+Things to fix:
 
 Make IP address automatic
 Make it so loop duration can be changed on the fly (currently you need to stop and start shuffle playback to affect loop duration due to how i have implemented it.
