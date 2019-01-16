@@ -10,6 +10,7 @@ It's super hacky as i dont know much about coding, but it works very well and is
 
 - set up OLA with up to 15 universes with Artnet in and sacn out or vice versa depending on your rig
 - make sure python is installed on your pi
+- install pyosc - https://github.com/ptone/pyosc
 - copy oscolarecorder.py file to your Pi in the home directory.
 type:
 sudo python oscolarecorder.py
