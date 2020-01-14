@@ -33,9 +33,7 @@ shuffle all recorded files on loop - /3/shuffle
 
 set duration of how long a recording plays before moving onto the next one - /3/loopduration
 
-
-
-I will upload my template for Touchosc shortly, it has 3 pages, 66 record and playback banks.
+I have uploaded my templates for Touchosc, The main one has 3 pages, record, playback and control, the other has only playback functionality.
 
 Things to fix:
 
