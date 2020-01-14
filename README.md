@@ -1,6 +1,6 @@
 # OscOlaRecorder
 
-a simple python script i hacked together to allow recording, playback, loop and shuffle of dmx data via OLA on a raspberry pi or compatible linux device.
+A simple python script i hacked together to allow recording, playback, loop and shuffle of dmx data via OLA on a raspberry pi or compatible linux device.
 
 I made it so i could easily record, trigger and run content to an LED installation, with an autopilot/shuffle function so i didnt have to keep my expensive latop at the event.
 
