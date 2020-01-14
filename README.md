@@ -50,4 +50,4 @@ Impliment OSC feedback messages so touchosc buttons can change colour when a par
 
 have fun!
 
-Lightsteed
+Lightsteed / Beam Hacker
