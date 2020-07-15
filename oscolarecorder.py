@@ -192,7 +192,7 @@ for x in range(1,70):
 	        server.addMsgHandler("/1/"+"toggle"+`x`, record)
 
 for y in range(1,70):
-                server.addMsgHandler("/2/"+"toggle"+`y`, playback)
+                server.addMsgHandler("/2/"+"push"+`y`, playback)
 
 server.addMsgHandler("/3/stopallplay", stopallplay)
 server.addMsgHandler("/3/stopallrec", stopallrec)
