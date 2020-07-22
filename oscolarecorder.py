@@ -14,10 +14,12 @@ from os.path import isfile, join
 from random import shuffle
 from random import sample
 
+# TODO: add code to create "/home/pi/myoscrecs" folder if not present.
 os.chdir('/home/pi/myoscrecs')
 time.sleep(5)
-server = ThreadingOSCServer( ("10.1.1.143", 7002) )# the ip adress of your pi/device goes here and the incoming OSC port you would like to use, i used 7002 for the port - the incoming port should be matched on your TouchOSC / OSC app
 
+# TODO: Add code to retreive ip address automatically (ethernet IP prioritized, wifi IP if ethernet not connected)
+server = ThreadingOSCServer( ("10.1.1.143", 7002) )# the ip adress of your pi/device goes here and the incoming OSC port you would like to use, i used 7002 for the port - the incoming port should be matched on your TouchOSC / OSC app
 client = OSCClient()
 
 #def handle_timeout(self):
@@ -25,14 +27,22 @@ client = OSCClient()
 #This here is just to do something while the script recieves no information....
 #server.handle_timeout = types.MethodType(handle_timeout, server)
 
+# Record Global Var
 r = None
+# Playback Global Var
 p = None
+# Stop Recording Global Var
 sr = 0
+#Stop Playback Global Var
 sp = 0
+#Set to loop Global Var
 loop = 1
+#Duration Time Global Var
 loopd = 10
+#Set to Shuffle Global Var
 shuffleloop = 1
 
+#Function to record DMX input using ola_recorder program and save into banks numbered 1-XX - Recording starts and stops when triggered via OSC.
 def record(path, tags, args, source):
 		split = path.split("/1/toggle")
 		x = split.pop()
@@ -70,6 +80,8 @@ def record(path, tags, args, source):
 				r.kill()
 				sr = 0
 
+				
+#Function to Playback recorded DMX clips using ola_recorder program -  Playback starts and stops when triggered via OSC.
 def playback(path, tags, args, source):
         split = path.split("/2/push")
         y = split.pop()
@@ -101,6 +113,7 @@ def playback(path, tags, args, source):
                                         sp = 1
 					sr = 0
 
+					# Function to kill all playback
 def stopallplay(path, tags, args, source):
 		state=int(args[0])
 		print "Stop All Playback:", state;
@@ -109,7 +122,8 @@ def stopallplay(path, tags, args, source):
         	if state == 1:
 			p.kill()
 			sp = 0
-
+			
+#Function to kill all recording
 def stopallrec(path, tags, args, source):
         state=int(args[0])
         print "Stop All Recording:", state;
@@ -118,26 +132,29 @@ def stopallrec(path, tags, args, source):
         if state == 1:
                 r.kill()
                 sr = 0
-
+		
+#Function to set loop duration 
 def loopduration(path, tags, args, source):
 		global loopd
 		loopd=int(args[0])
 #		print "Loop Duration", loopd;
 
-
+#Function to play all recorded clips in sequence
 def playall(path, tags, args, source):
 		global loop
 		state = int(args[0])
 		loop=state
 		if loop == 1:
 			playallloop()
-
+			
+#Function to shuffle order of clips playing back 
 def shuffler(path, tags, args, source):
                 global shuffleloop
                 state = int(args[0])
                 shuffleloop=state
                 #if shuffle == 1:
 
+#Function to loop single file
 def playallloop():
 		global sp
 		global p
@@ -187,7 +204,7 @@ def playallloop():
 				sr = 0
 			time.sleep(loopd)
 
-#you can increase the amount of record and playback banks by increasing the number from 70 to whatever in the below lines.
+#OSC Client message handling -You can increase the amount of record and playback banks by increasing the number from 70 to whatever in the below lines.
 for x in range(1,70):
 	        server.addMsgHandler("/1/"+"toggle"+`x`, record)
 
